@@ -1,0 +1,94 @@
+// https://unixcheats.com/ - Bittimoruk - Turkish-English-Educational-Program - Türkçe-İngilizce Eğitici Program
+#include <iostream>
+#include <locale.h> //Tüm dillerin olduğu kütüphanemiz.
+#include <fstream> //Dosya okuma ve yazdırma kütüphanemiz.
+#include <string>
+#include <conio.h> //_getch(); kullanabilmemiz için.
+#include <windows.h>
+#include <codecvt>
+
+using namespace std;
+
+wstring convert(wstring a)
+{
+	for (int i = 0; i < a.length(); i++)
+	{
+		a[i] = toupper(a[i]);
+	}
+	return a;
+}
+
+wstring convert2(wstring character)
+{
+	for (int i = 0; i < character.length(); i++)
+	{
+		character[i] = toupper(character[i]);
+	}
+	return character;
+}
+
+
+int main() {
+	bb:
+	SetConsoleOutputCP(1254);
+	SetConsoleCP(1254);
+	setlocale(LC_ALL, "Turkish"); //Türkçe kütüphanesini programa ekledik.
+	
+	wstring character;
+
+	wcout << L"Hangi harfi seçmek istiyorsun?" << endl << L"\nall -> Bütün alfabe\n" << endl;
+	wcin >> character;
+
+	const locale empty_locale = locale::empty();
+	typedef codecvt_utf8<wchar_t> converter_type;
+	const converter_type* converter = new converter_type;
+	const locale utf8_locale = locale(empty_locale, converter);
+	wifstream myfileRead(L"Wordlist_" + character + L".txt");
+	myfileRead.imbue(utf8_locale);
+
+	wstring line; wstring wordTr; wstring wordIng; wstring a;
+
+	int one; int two; int three; int four; int total = 0; int right = 0; int wrong = 0;
+
+	if (myfileRead.is_open()) {
+		system("cls");
+		while (getline(myfileRead, line))
+		{
+			++total;
+
+			one = line.find(L"="); two = (line.rfind(L"=") + 1); three = (line.length() - 1);
+
+			wordTr = line.substr(0, one);
+			wordIng = line.substr(two, three);
+
+			wcout << L"\"" << wordTr << L"\"" << L" kelimesinin Türkçe anlamı nedir?\n" << endl;
+			//wcin >> a;
+			if (total <= 1) {
+				getchar();
+			}
+			getline(wcin, a);
+			if (convert(a) == convert(wordIng)) {
+				wcout << L"\nTebrikler! Doğru bildiniz." << endl;
+				wcout << L"---------------------------------------------------------------" << endl;
+				++right;
+			}
+			else {
+				wcout << L"\nAh! Yanlış girdin. " << L"Doğru cevap : \"" + wordIng << L"\" olacaktı." << endl;
+				wcout << L"---------------------------------------------------------------" << endl;
+				++wrong;
+			}
+		}
+	}
+	else {
+		system("cls");
+		wcout << L"Yanlış harf girdin. ";
+		goto bb;
+	}
+	int success = (right * 100) / total;
+	wcout << L"\nToplam doğru cevabınız : " << right << L" | " << L"Toplam yanlış cevabınız : " << wrong << L" | " << L"Başarı durumu : %" << success << endl;
+	wcout << L"\n---------------------------------------------------------------\n" << endl;
+	wcout << L"Tebrikler! Programdan çıkmak için herhangi bir tuşa basabilirsiniz." << endl;
+	_getch();
+	//system("Pause");
+	return 0;
+}
