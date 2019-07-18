@@ -43,7 +43,7 @@ bb:
 
 	wstring character; wstring wordlistRandom; wstring words;
 
-	int selectLanguage; int totalLinage = 0; int abc2; int sayi1 = 1; int i = 0;
+	int selectLanguage; int totalLinage = 0;
 
 	wcout << L"Hangi dilde cevaplamak istiyorsun?" << endl << L"\n[TR] -> Türkçe\n" << L"[ING] -> İngilizce\n" << L"[1] -> Wordlist_wrong.txt'i Sil\n" << L"[2] -> Wordlist_wrong2.txt'i Sil\n" << endl;
 	wcout << L"Komut : ";
@@ -96,6 +96,11 @@ bb:
 		wcout << L"Bu Dosyayı açamazsınız. ";
 		goto bb;
 	}
+	else if (!myfileRead.is_open()) {
+		system("cls");
+		wcout << L"Dosya bulunamadı. ";
+		goto bb;
+	}
 	else {
 		myfileWrite.open(L"Wordlist_wrong.txt", ios::app);
 	}
@@ -138,7 +143,7 @@ bb:
 			while (getline(myfileRead, wordlistRandom)) {
 				if (wordlistRandom.find(L"=")) {
 					++totalLinage;
-					wcout << L"Toplam satır sayısı : " << totalLinage << endl;
+					//wcout << L"Toplam satır sayısı : " << totalLinage << endl;
 					vectorWordlist.push_back(wordlistRandom);
 				}
 			}
