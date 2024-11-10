@@ -1,0 +1,14 @@
+Qualified=Ehliyetli,kalifiye
+Quality=Nitelik,kalite
+Quantity=Miktar
+Quarrel=Tartışmak,atışmak
+Quarter=Çeyrek
+Queen=Kraliçe
+Question=Soru,soru sormak,sormak
+Queue=Sıra,kuyruk
+Quick=Çabuk
+Quiet=Sessiz,sakin,huzurlu
+Quite=Hemen hemen,yaklaşık olarak
+Quiz=Küçük test,test
+Quato=Kota,kontejan
+Quote=Aktarma,söyleme
