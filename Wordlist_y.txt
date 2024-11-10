@@ -1,0 +1,8 @@
+Yard=Avlu
+Year=Yıl
+Yellow=Sarı
+Yes=Evet
+Yesterday=Dün
+Yet=Hala,şimdiye kadar,henüz
+Yoghurt=Yoğurt
+Young=Genç
